@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+.ng-invalid .form-control.ng-invalid ~ .invalid-feedback {
+    display: block;
+}
+.ng-invalid .form-group > .form-control.ng-invalid {
+    border-color: red;
+}

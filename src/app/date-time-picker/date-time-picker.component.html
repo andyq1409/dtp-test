@@ -1,0 +1,64 @@
+<div class="input-group mr-2">
+  <input
+    class="form-control"
+    [(ngModel)]="dtStr"
+    (change)="onInputChange($event)"
+    maxLength={{lenInput}}
+    type="text"
+    placeholder="{{inputDatetimeFormat}}"
+  />
+
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary"
+      [ngbPopover]="calendarContent"
+      type="button"
+    >
+      <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #calendarContent>
+  <div *ngIf="!showTimePickerToggle">
+    <ngb-datepicker
+      id="dp"
+      #dp
+      name="datepicker"
+      [ngModel]="datetime"
+      (ngModelChange)="onDateChange($event, dp)"
+    ></ngb-datepicker>
+    <button *ngIf="enableTime"
+      style="width: 97%"
+      class="btn btn-block btn-outline-secondary"
+      [ngbPopover]="calendarContent"
+      type="button"
+      (click)="toggleDateTimeState($event)"
+    >
+      <fa-icon [icon]="['far', 'clock']"></fa-icon>
+    </button>
+  </div>
+  <div *ngIf="showTimePickerToggle">
+    <button
+      style="width: 100%"
+      class="btn btn-block btn-outline-secondary"
+      [ngbPopover]="calendarContent"
+      type="button"
+      (click)="toggleDateTimeState($event)"
+    >
+      <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+    </button>
+    <div class="mt-auto">
+      <ngb-timepicker
+        name="timepicker"
+        [ngModel]="datetime"
+        (ngModelChange)="onTimeChange($event)"
+        [seconds]="seconds"
+        [hourStep]="hourStep"
+        [minuteStep]="minuteStep"
+        [secondStep]="secondStep"
+      >
+      </ngb-timepicker>
+    </div>
+  </div>
+</ng-template>
